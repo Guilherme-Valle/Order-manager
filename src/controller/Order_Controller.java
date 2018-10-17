@@ -37,6 +37,7 @@ public class Order_Controller {
     private Orders_Screen theView;
     public ArrayList<Order> listOfProducts;
     public Kombi kombi;
+    public int numPedido;
     DefaultListModel<Order> modelSell;
     /**
      * Construtor do controlador
@@ -61,7 +62,7 @@ public class Order_Controller {
         listOfProducts.add(new Order(13, "Milkshake ovomaltine", 8));
         listOfProducts.add(new Order(14, "Milkshake morango", 8));
         kombi = new Kombi(listOfProducts);
-        
+        numPedido = 0;
         DefaultListModel<Order> model = new DefaultListModel<Order>();
         for (Order i: listOfProducts){
             model.addElement(i);
@@ -119,15 +120,23 @@ public class Order_Controller {
             db.registraVenda(pedidos);
             Document document = new Document();
             Random gerador = new Random();
+            numPedido++;
             int numRandomComanda = gerador.nextInt();
             try {    
                 PdfWriter.getInstance(document, new FileOutputStream("comanda"+numRandomComanda+".pdf"));
                 document.open();
+                double totalPedido = 0;
                 Font font = new Font();
                 font.setSize(40);
+                
+                document.add(new Paragraph("Pedido num:" +numPedido, font));
+                font.setSize(30);
                 for (int z=0; z < modelSell.getSize(); z++){
                     document.add(new Paragraph(modelSell.getElementAt(z).getName(), font));
+                    totalPedido += modelSell.getElementAt(z).getPrice();
                 }
+                
+                document.add(new Paragraph("Total do pedido: "+totalPedido, font));
                 
             } catch(DocumentException de){
                 System.err.println(de.getMessage());
