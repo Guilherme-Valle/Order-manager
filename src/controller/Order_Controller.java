@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.DocPrintJob;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.Kombi;
@@ -52,7 +53,9 @@ public class Order_Controller {
         listOfProducts.add(new Order(3, "Batata promo", 4));
         listOfProducts.add(new Order(4, "Batata frita", 7));
         listOfProducts.add(new Order(5, "Churros", 4));
-        listOfProducts.add(new Order(6, "Churros gelato", 9));
+        listOfProducts.add(new Order(6, "Churros gelato chocolate", 8));
+        listOfProducts.add(new Order(6, "Churros gelato morango", 8));
+        listOfProducts.add(new Order(6, "Churros gelato creme", 8));
         listOfProducts.add(new Order(7, "Suco copo", 5));
         listOfProducts.add(new Order(8, "Suco garrafa", 12));
         listOfProducts.add(new Order(9, "Sorvete chocolate", 5));
@@ -61,6 +64,8 @@ public class Order_Controller {
         listOfProducts.add(new Order(12, "Milkshake chocolate", 8));
         listOfProducts.add(new Order(13, "Milkshake ovomaltine", 8));
         listOfProducts.add(new Order(14, "Milkshake morango", 8));
+        listOfProducts.add(new Order(14, "Milkshake creme", 8));
+
         kombi = new Kombi(listOfProducts);
         numPedido = 0;
         DefaultListModel<Order> model = new DefaultListModel<Order>();
@@ -178,6 +183,7 @@ public class Order_Controller {
                 }
                 document.add(new Paragraph("Faturamento: R$" +lucro));
                 document.add(new Paragraph("Total de vendas: " +vendas));
+               
                 
             } catch(DocumentException de){
                 System.err.println(de.getMessage());
