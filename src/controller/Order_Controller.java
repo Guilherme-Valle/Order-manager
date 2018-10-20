@@ -129,14 +129,16 @@ public class Order_Controller {
                 Font font = new Font();
                 font.setSize(40);
                 
-                document.add(new Paragraph("Pedido num:" +numPedido, font));
+                document.add(new Paragraph("Número do pedido: " +numPedido, font));
                 font.setSize(30);
+                document.add(new Paragraph("                                 "));
+
                 for (int z=0; z < modelSell.getSize(); z++){
                     document.add(new Paragraph(modelSell.getElementAt(z).getName(), font));
                     totalPedido += modelSell.getElementAt(z).getPrice();
                 }
                 
-                document.add(new Paragraph("Total do pedido: "+totalPedido, font));
+                document.add(new Paragraph("Total do pedido: R$"+totalPedido, font));
                 
             } catch(DocumentException de){
                 System.err.println(de.getMessage());
@@ -196,4 +198,3 @@ public class Order_Controller {
     
    
 }
-
